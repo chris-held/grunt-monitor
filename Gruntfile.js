@@ -1,6 +1,7 @@
 var async = require('async'),
   _ = require('underscore')._,
   config = require('./config'),
+  request = require('request'),
   http = require('http');
 
 module.exports = function(grunt) {
@@ -10,38 +11,30 @@ module.exports = function(grunt) {
     //the async module
     var done = this.async();
 
-    async.forever(
-      function(next){
-        setInterval(function(){
-          async.each(config.servers, function(server, cb){
-            var start = new Date().getTime();
-            var req = http.request(server, function(res) { 
-              var end = new Date().getTime();
-              var took = end - start;
-              grunt.log.writeln("Got " + server.host + " on port " + server.port + " took " + took + "ms");
-              if(took > 500) {
-                //TODO took too long(make ttl configurable), send a warning email
-              }
-              cb(); 
-            });
-            req.on('error', function(err) {
-              cb(err);
-            });
-            req.end();
-          }, function(err){
-            if(err) {
-              grunt.log.writeln('problem with get: ' + err.message);
-              next(err);
-              //TODO - send email
-            }
-            next();
-          });
-        }, config.waitInterval * 1000);
-      },
-      function(err){
-        done();
-      }
-    );
+    setInterval(function(){
+      async.each(config.servers, function(server, cb){
+        var start = new Date().getTime();
+        request(server, function(err, response, body){
+          var end = new Date().getTime();
+          var took = end - start;
+          if(err) {
+            return cb(err);
+          } else if (response && response.statusCode != 200) {
+            return cb("Received statusCode of " + response.statusCode + ", was expecting 200");
+          } else if (took > 500) {
+            return cb("Took too long - request for " + server.uri + " took " + took + "ms");
+          } else {
+            grunt.log.writeln("Got " + server.uri + " took " + took + "ms");
+            cb(); 
+          }          
+        });
+      }, function(err){
+        if(err) {
+          grunt.log.writeln('problem with get: ' + err.message);
+          //TODO - send email, alert newrelic, etc.
+        }
+      })
+    }, config.waitInterval * 1000);
 
   });
 };
