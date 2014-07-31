@@ -1,20 +1,22 @@
 module.exports = {
-  waitInterval: 15,  //time in seconds to wait before pinging servers,
+  waitInterval: 1,  //time in seconds to wait before pinging servers,
   servers: [{
-    host: "127.0.0.1",
-    port: 8080,
-    path: "/",
+    uri: "http://127.0.0.1:8080/",
     method: "GET"
   },{
-    host: "127.0.0.1",
-    port: 8180,
-    path: "/",
+    uri: "http://127.0.0.1:8180/",
     method: "GET"
   }],
   email: {
-
+    SES: {
+      accessKeyID: "an aws access key",
+      secretAccessKey: "an aws secret key"
+    },
+    from: "do_not_reply@yourmailserver.com",
+    to: "devopsguys@yourmailserver.com",
+    subject: "grunt-monitor has detected a problem with one of your servers!"
   },
   newRelic: {
-    
+
   }
 };
