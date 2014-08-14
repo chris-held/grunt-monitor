@@ -20,13 +20,13 @@ module.exports = function(grunt) {
           var end = new Date().getTime();
           var took = end - start;
           if(err) {
-            return cb("Received error for server " + server.uri + ": " + err);
+            return cb("Received error for server " + server.name + ": " + err);
           } else if (response && response.statusCode != 200) {
-            return cb("Received statusCode of " + response.statusCode + ", was expecting 200 for server " + server.uri);
+            return cb("Received statusCode of " + response.statusCode + ", was expecting 200 for server " + server.name);
           } else if (took > 500) {
-            return cb("Took too long - request for " + server.uri + " took " + took + "ms");
+            return cb("Took too long - request for " + server.name + " took " + took + "ms");
           } else {
-            grunt.log.writeln("Got " + server.uri + " took " + took + "ms");
+            grunt.log.writeln("Got " + server.name + " took " + took + "ms");
             cb(); 
           }          
         });
