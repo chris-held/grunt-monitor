@@ -48,7 +48,6 @@ module.exports = function(grunt) {
           }
 
           if(config.newrelic) {
-            console.log("trying to send to new relic");
             newrelic.noticeError(err);
           }
         }
