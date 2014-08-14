@@ -16,7 +16,7 @@ or as a background process with (grunt &)
 
 ##TODOS
 
-debug emailing and figure out why nothing's getting sent out
-refactor this into a standalone task
-possibly remove grunt altogether (it's not much of a grunt task anymore)
+* debug emailing and figure out why nothing's getting sent out
+* refactor this into a standalone task
+* possibly remove grunt altogether (it's not much of a grunt task anymore)
 
