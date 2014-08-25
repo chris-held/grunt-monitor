@@ -17,6 +17,5 @@ module.exports = {
     from: "do_not_reply@yourmailserver.com",
     to: "devopsguys@yourmailserver.com",
     subject: "grunt-monitor has detected a problem with one of your servers!"
-  },
-  newRelic: true
+  }
 };

@@ -6,9 +6,7 @@ An (eventually) easy to configure monitoring solution
 #Setup
 
 * Copy sample-config.js into a new file named config.js and enter in the servers you want to monitor and
-any email / new relic configurations you want to set up.
-
-* If you're using newrelic, copy sample-newrelic.js into a new file names newrelic.js and fill out your newrelic specific stuff
+any email configurations you want to set up.
 
 run with grunt
 

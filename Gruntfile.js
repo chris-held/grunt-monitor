@@ -46,10 +46,6 @@ module.exports = function(grunt) {
               text: err
             });
           }
-
-          if(config.newrelic) {
-            newrelic.noticeError(err);
-          }
         }
       })
     }, config.waitInterval * 1000);
