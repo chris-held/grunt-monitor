@@ -11,7 +11,7 @@ module.exports = {
   }],
   email: {
     SES: {
-      accessKeyID: "an aws access key",
+      accessKeyId: "an aws access key",
       secretAccessKey: "an aws secret key"
     },
     from: "do_not_reply@yourmailserver.com",

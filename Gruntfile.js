@@ -4,7 +4,6 @@ var async = require('async'),
   request = require('request'),
   nodemailer = require('nodemailer'),
   ses = require('nodemailer-ses-transport'),
-  newrelic = require('newrelic'),
   http = require('http');
 
 module.exports = function(grunt) {
@@ -34,16 +33,18 @@ module.exports = function(grunt) {
         if(err) {
           grunt.log.writeln('problem with get: ' + err);
           if(config.email) {
-            var transporter = nodemailer.createTransport(ses({
-              accessKeyId: config.email.SES.accessKeyId,
-              secretAccessKey: config.email.SES.secretAccessKey
-            }));
+            var transporter = nodemailer.createTransport(ses(config.email.SES));
+
             console.log("trying to send email");
             transporter.sendMail({
               to: config.email.to,
               from: config.email.from,
               subject: config.email.subject,
               text: err
+            }, function(error, info){
+              if(error) {
+                console.log(error);
+              } 
             });
           }
         }
