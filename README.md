@@ -5,6 +5,8 @@ An (eventually) easy to configure monitoring solution
 
 #Setup
 
+* install grunt-cli with npm install -g grunt-cli
+
 * Copy sample-config.js into a new file named config.js and enter in the servers you want to monitor and
 any email configurations you want to set up.
 
