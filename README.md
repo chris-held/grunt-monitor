@@ -14,6 +14,8 @@ run with grunt
 
 or as a background process with (grunt &)
 
+if you're connected to a remote server over ssh use (nohup grunt &)
+
 ##TODOS
 
 * refactor this into a standalone grunt module OR
